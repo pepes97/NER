@@ -16,9 +16,9 @@ def main(char_embedding_dim, char_len, hidden_dim, embedding_dim, bidirectional,
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     print(f"\033[1mDevice \033[0m: {device} \033[0m")
 
-    training_file = 'dataset/train.csv'
-    dev_file = 'dataset/dev.csv'
-    test_file = 'dataset/test.csv'
+    training_file = 'dataset/train.tsv'
+    dev_file = 'dataset/dev.tsv'
+    test_file = 'dataset/test.tsv'
     fast_text_file = 'dataset/wiki-news-300d-1M.vec'
 
     print(f"\033[1mTrain file \033[0m: {training_file} \033[0m")
@@ -89,5 +89,6 @@ if __name__ == '__main__':
     dropout = args.dropout
     learning_rate = args.lr
     batch_size = args.batch_size
+    epochs = args.epochs
 
-    main(char_embedding_dim, char_len, hidden_dim, embedding_dim, bidirectional, num_layers, dropout, learning_rate, batch_size)
+    main(char_embedding_dim, char_len, hidden_dim, embedding_dim, bidirectional, num_layers, dropout, learning_rate, batch_size, epochs)

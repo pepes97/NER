@@ -1,9 +1,9 @@
-from sklearn.metrics import precision_score as sk_precision
-from sklearn.metrics import recall_score, f1_score
-from torch import nn
 import torch
+from torch import nn
 from tqdm import tqdm
 from torch.utils.data import DataLoader
+from sklearn.metrics import recall_score, f1_score
+from sklearn.metrics import precision_score as sk_precision
 
 def compute_metrics(model:nn.Module, l_dataset:DataLoader, l_label_vocab:dict, device):
     all_predictions = list()
