@@ -19,7 +19,7 @@ def main(char_embedding_dim, char_len, hidden_dim, embedding_dim, bidirectional,
     training_file = 'dataset/train.tsv'
     dev_file = 'dataset/dev.tsv'
     test_file = 'dataset/test.tsv'
-    fast_text_file = 'dataset/wiki-news-300d-1M.vec'
+    fast_text_file = 'dataset/glove.6B.300d.txt'
 
     print(f"\033[1mTrain file \033[0m: {training_file} \033[0m")
     print(f"\033[1mDev file \033[0m: {dev_file} \033[0m")
