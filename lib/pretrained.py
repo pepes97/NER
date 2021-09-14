@@ -36,11 +36,11 @@ class PreTrainedEmbedding():
             if idx==0:
               continue
             tokens = line.strip().split()
-            print(len(tokens))
-            print(tokens[0])
-            dictionary[tokens[0]]= tokens[i+1:301]
-            print(dictionary)
-        print("ciao")
+            data = []
+            for i in range(self.dim):
+              data.append(float(tokens[i+1]))
+            dictionary[tokens[0]]= data
+      
         return dictionary
 
     def embedding_weights(self):
@@ -52,7 +52,7 @@ class PreTrainedEmbedding():
                                 then I will associate those weights with the corresponding value of the word, 
                                 otherwise a random value.
         """
-        print("hello")
+        
         embeddings_weights = torch.zeros([len(self.vocab),self.dim])
         random = torch.rand(1,self.dim)[0]
 
@@ -60,6 +60,7 @@ class PreTrainedEmbedding():
             if elem not in self.dictionary_emb:
                 embeddings_weights[self.vocab[elem]] = random
             else:
+                
                 embeddings_weights[self.vocab[elem]] = torch.tensor(self.dictionary_emb[elem])
         
         return embeddings_weights

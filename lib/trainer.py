@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 from torch.utils.data import Dataset
+from tqdm import tqdm
 
 class Trainer():
     def __init__(
@@ -50,8 +51,6 @@ class Trainer():
         """
         
         assert epochs > 1 and isinstance(epochs, int)
-        if self.log_level > 0:
-            print('Training ...')
         train_loss = 0.0
         patience = 0
         best_loss = 0.0
