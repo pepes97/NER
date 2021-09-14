@@ -1,4 +1,5 @@
 import torch
+from tqdm import tqdm
 
 class PreTrainedEmbedding():
     def __init__(self,
@@ -30,15 +31,16 @@ class PreTrainedEmbedding():
         
         dictionary = {}
         fin = open(self.path, 'r', encoding='utf-8', newline='\n', errors='ignore')
-        count =0
-        for line in fin:
+        
+        for idx, line in enumerate(tqdm(fin)):
+            if idx==0:
+              continue
             tokens = line.strip().split()
-            data = []
-            if tokens[0] in self.vocab:
-                count+=1
-            for i in range(self.dim):
-                data.append(float(tokens[i+1]))
-            dictionary[tokens[0]]= data
+            print(len(tokens))
+            print(tokens[0])
+            dictionary[tokens[0]]= tokens[i+1:301]
+            print(dictionary)
+        print("ciao")
         return dictionary
 
     def embedding_weights(self):
@@ -50,7 +52,7 @@ class PreTrainedEmbedding():
                                 then I will associate those weights with the corresponding value of the word, 
                                 otherwise a random value.
         """
-        
+        print("hello")
         embeddings_weights = torch.zeros([len(self.vocab),self.dim])
         random = torch.rand(1,self.dim)[0]
 

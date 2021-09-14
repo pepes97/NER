@@ -26,12 +26,13 @@ def main(char_embedding_dim, char_len, hidden_dim, embedding_dim, bidirectional,
     print(f"\033[1mTest file \033[0m: {test_file} \033[0m")
 
     print(f"\033[1mCreating dataset... \033[0m")
-    trainset = SvevaDataset(training_file,char_len,device)
-    devset = SvevaDataset(dev_file,char_len,device,trainset.vocab,trainset.vocab_label, trainset.vocab_char)
-    testset = SvevaDataset(test_file,char_len,device,trainset.vocab,trainset.vocab_label, trainset.vocab_char)
+    trainset = SvevaDataset(training_file,char_len)
+    devset = SvevaDataset(dev_file,char_len,trainset.vocab,trainset.vocab_label, trainset.vocab_char)
+    testset = SvevaDataset(test_file,char_len,trainset.vocab,trainset.vocab_label, trainset.vocab_char)
 
     print(f"\033[1mVocab size \033[0m: {len(trainset.vocab)} \033[0m")
     print(f"\033[1mVocab label size \033[0m: {len(trainset.vocab_label)} \033[0m")
+
 
     embedding = PreTrainedEmbedding(fast_text_file, 300, trainset.vocab)
 
