@@ -56,6 +56,8 @@ def main(char_embedding_dim, char_len, hidden_dim, embedding_dim, bidirectional,
     test_dataset = DataLoader(testset, batch_size=batch_size)
 
     if not only_test:
+        if not os.path.exists("./models"):
+            os.mkdir("./models")
         print(f"\033[1mTraining... \033[0m")
         trainer.train(train_dataset, valid_dataset, epochs)
 
