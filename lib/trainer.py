@@ -126,8 +126,6 @@ class Trainer():
                 valid_loss += sample_loss.tolist()
         
         if (valid_loss / len(valid_dataset)) < best_loss:
-            if not os.path.exists("models"):
-                os.makedirs("models")
             best_loss = valid_loss / len(valid_dataset)
             patience = 0
             torch.save(self.model.state_dict(), 'models/best_model.pt')
