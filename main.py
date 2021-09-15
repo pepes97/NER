@@ -1,4 +1,5 @@
 import argparse
+import os
 
 import torch
 from torch import nn
@@ -11,7 +12,7 @@ from lib.model import HParams, SvevaModel
 from lib.trainer import Trainer
 from lib.utils import compute_metrics
 
-def main(char_embedding_dim, char_len, hidden_dim, embedding_dim, bidirectional, num_layers, dropout, learning_rate, batch_size, epochs):
+def main(char_embedding_dim, char_len, hidden_dim, embedding_dim, bidirectional, num_layers, dropout, learning_rate, batch_size, epochs, only_test):
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     print(f"\033[1mDevice \033[0m: {device} \033[0m")
@@ -54,16 +55,35 @@ def main(char_embedding_dim, char_len, hidden_dim, embedding_dim, bidirectional,
     valid_dataset = DataLoader(devset, batch_size=batch_size)
     test_dataset = DataLoader(testset, batch_size=batch_size)
 
-    print(f"\033[1mTraining... \033[0m")
-    trainer.train(train_dataset, valid_dataset, epochs)
+    if not only_test:
+        print(f"\033[1mTraining... \033[0m")
+        trainer.train(train_dataset, valid_dataset, epochs)
 
-    print(f"\033[1mTesting... \033[0m")
-    precisions = compute_metrics(model, test_dataset, trainset.vocab)
-    p = precisions["precision"]
-    mp = precisions["macro_precision"]
-    r = precisions["recall"]
-    f1= precisions["f1"]
-    print(f"\033[1mMicro Precision: {p}, Macro Precision: {mp}, Recall: {r}, F1_score: {f1}\033[0m")
+        print(f"\033[1mLoad Best Model... \033[0m")
+        trainer.model.load_state_dict(torch.load('models/best_model.pt'), map_location=device)
+        print(f"\033[1mTesting... \033[0m")
+        precisions = compute_metrics(trainer.model, test_dataset, trainset.vocab)
+        p = precisions["precision"]
+        mp = precisions["macro_precision"]
+        r = precisions["recall"]
+        f1= precisions["f1"]
+        print(f"\033[1mMicro Precision: {p}, Macro Precision: {mp}, Recall: {r}, F1_score: {f1}\033[0m")
+
+    else:
+        if os.path.exists('models/best_model.pt'):
+            print(f"\033[1mLoad Best Model... \033[0m")
+            trainer.model.load_state_dict(torch.load('models/best_model.pt'), map_location=device)
+        else:
+            print(f"\033[1mBest Model not found... \033[0m")
+            exit()
+
+        print(f"\033[1mTesting... \033[0m")
+        precisions = compute_metrics(trainer.model, test_dataset, trainset.vocab)
+        p = precisions["precision"]
+        mp = precisions["macro_precision"]
+        r = precisions["recall"]
+        f1= precisions["f1"]
+        print(f"\033[1mMicro Precision: {p}, Macro Precision: {mp}, Recall: {r}, F1_score: {f1}\033[0m")
 
 if __name__ == '__main__':
 
@@ -79,6 +99,7 @@ if __name__ == '__main__':
     parser.add_argument('--lr', type=float, default=0.001, help='learning rate')
     parser.add_argument('--batch-size', type=int, default=128, help='batch size')
     parser.add_argument('--epochs', type=int, default=50, help='number of epochs')
+    parser.add_argument('--only-test', type=bool, default=False, help='only testing')
 
     args = parser.parse_args()
     char_embedding_dim = args.char_embedding_dim
@@ -91,5 +112,6 @@ if __name__ == '__main__':
     learning_rate = args.lr
     batch_size = args.batch_size
     epochs = args.epochs
+    only_test = args.only_test
 
-    main(char_embedding_dim, char_len, hidden_dim, embedding_dim, bidirectional, num_layers, dropout, learning_rate, batch_size, epochs)
+    main(char_embedding_dim, char_len, hidden_dim, embedding_dim, bidirectional, num_layers, dropout, learning_rate, batch_size, epochs, only_test)
