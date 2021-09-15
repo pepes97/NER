@@ -26,17 +26,17 @@ python main.py --char-embedding-dim CHAR-EMB-DIM --char-len -- CHAR-LEN --hidden
 ```
 where
 
-- `CHAR-EMB-DIM` is the dimension of the char embedding, defauls is 10
-- `CHAR-LEN` is the maximum length of the char sequence, defaults is 8
-- `HIDDEN-DIM` is the dimension of the hidden layer, defaults is 256
-- `EMB-DIM` is the dimension of the word embedding, defaults is 300
-- `EPOCHS` is the number of epochs, defaults is 50
-- `BATCH-SIZE` is the batch size, defaults is 64
-- `LEARNING-RATE` is the learning rate, defaults is 0.001
-- `DROPOUT` is the dropout rate, defaults is 0.5
-- `BIDIRECTIONAL` is the bidirectional flag, defaults is True
-- `NUM-LAYERS` is the number of layers, defaults is 2
-- `ONLY-TEST` is the only test flag, defaults is False
+- `CHAR-EMB-DIM` is the dimension of the char embedding, default is 10
+- `CHAR-LEN` is the maximum length of the char sequence, default is 8
+- `HIDDEN-DIM` is the dimension of the hidden layer, default is 256
+- `EMB-DIM` is the dimension of the word embedding, default is 300
+- `EPOCHS` is the number of epochs, default is 50
+- `BATCH-SIZE` is the batch size, default is 64
+- `LEARNING-RATE` is the learning rate, default is 0.001
+- `DROPOUT` is the dropout rate, default is 0.5
+- `BIDIRECTIONAL` is the bidirectional flag, default is True
+- `NUM-LAYERS` is the number of layers, default is 2
+- `ONLY-TEST` is the only test flag, default is False
 
 
 for example, for training:
