@@ -53,7 +53,7 @@ class Trainer():
         assert epochs > 1 and isinstance(epochs, int)
         train_loss = 0.0
         patience = 0
-        best_loss = 0.0
+        best_loss = 30000
         for epoch in range(epochs):
             if self.log_level > 0:
                 print(' Epoch {:03d}'.format(epoch + 1))
