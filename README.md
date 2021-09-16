@@ -2,7 +2,7 @@
 
 Named Entity Recognition (NER) is a process of identifying and recognizing entities through text.
 
-The goal of the project is to create a model that is able to find an entity from the raw data and can determine the category to which the element belongs. There are four categories: names of people, organizations, places and more. Identified by the labels PER, ORG, LOC, and O respectively. This article will discuss several techniques to solve this problem and the results obtained.
+The goal of the project is to create a model that is able to find an entity from the raw data and can determine the category to which the element belongs. There are four categories: names of people, organizations, places and more. Identified by the labels PER, ORG, LOC, and O respectively.
 
 ## Install 
 
