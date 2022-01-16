@@ -4,7 +4,20 @@ Named Entity Recognition (NER) is a process of identifying and recognizing entit
 
 The goal of the project is to create a model that is able to find an entity from the raw data and can determine the category to which the element belongs. There are four categories: names of people, organizations, places and more. Identified by the labels PER, ORG, LOC, and O respectively.
 
-## Install 
+## Table of contents
+
+* [Development Setup](#Development-Setup)
+* [Requirements](#Requirements)
+  * [Download the glove data](#Download-the-glove-data)
+  * [Run](#Run)
+
+### Development Setup
+
+<p align="center">
+  <img width="600" height="350" src="https://user-images.githubusercontent.com/56698309/149672318-96283732-007b-44c1-9603-72a384035098.png">
+</p>
+
+### Requirements 
 
 ```
 conda create --name ner python=3.7.11
@@ -12,7 +25,7 @@ conda activate ner
 pip install -r requirements.txt
 ```
 
-## Download the glove data
+### Download the glove data
 
 ```
 $ cd dataset
